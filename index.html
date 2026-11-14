@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Space Crew: Zombie Outbreak</title>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <!-- Подключаем современный гладкий шрифт Roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -19,11 +20,12 @@
             height: 100%;
             background-color: #0b0e14;
             overflow: hidden;
-            font-family: 'Orbitron', sans-serif;
+            font-family: 'Roboto', sans-serif; /* Изменили на гладкий шрифт */
         }
         canvas {
             display: block;
             margin: 0 auto;
+            image-rendering: auto; /* Включаем сглаживание холста */
         }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
@@ -207,19 +209,20 @@ class MenuScene extends Phaser.Scene {
         cBg.fillRoundedRect(width - 145, 14, 125, 34, 8);
         this.add.image(width - 124, 31, 'coin').setScale(0.8);
         this.coinTxt = this.add.text(width - 106, 31, GameData.coins.toString(), {
-            fontSize: '16px', fontWeight: 'bold', color: '#ffd700'
+            fontSize: '16px', fontWeight: 'bold', color: '#ffd700', fontFamily: 'Roboto, sans-serif'
         }).setOrigin(0, 0.5);
 
         this.add.text(width / 2, height * 0.12, 'SPACE CREW: ZOMBIE OUTBREAK', {
             fontSize: Math.min(width * 0.035, 24) + 'px',
-            fontWeight: '900', color: '#ffffff', stroke: '#00b0ff', strokeThickness: 4
+            fontWeight: '900', color: '#ffffff', stroke: '#00b0ff', strokeThickness: 4,
+            fontFamily: 'Roboto, sans-serif'
         }).setOrigin(0.5);
 
         this.preview = this.add.image(width * 0.20, height * 0.52, 'crew_' + GameData.selected).setScale(1.8);
         this.tweens.add({ targets: this.preview, y: height * 0.52 - 6, duration: 1000, yoyo: true, repeat: -1 });
-        this.suitLabel = this.add.text(width * 0.20, height * 0.72, '', { fontSize: '12px', fontWeight: 'bold', color: '#00e5ff' }).setOrigin(0.5);
+        this.suitLabel = this.add.text(width * 0.20, height * 0.72, '', { fontSize: '12px', fontWeight: 'bold', color: '#00e5ff', fontFamily: 'Roboto, sans-serif' }).setOrigin(0.5);
 
-        this.add.text(width * 0.58, height * 0.22, 'ВЫБЕРИТЕ КОСТЮМ:', { fontSize: '12px', fontWeight: 'bold', color: '#90a4ae' }).setOrigin(0.5);
+        this.add.text(width * 0.58, height * 0.22, 'ВЫБЕРИТЕ КОСТЮМ:', { fontSize: '12px', fontWeight: 'bold', color: '#90a4ae', fontFamily: 'Roboto, sans-serif' }).setOrigin(0.5);
 
         this.cards = [];
         const cols = 2, w = 135, h = 46;
@@ -233,8 +236,8 @@ class MenuScene extends Phaser.Scene {
             const cont = this.add.container(cx, cy);
             const box = this.add.graphics();
             const icon = this.add.image(-44, 0, 'crew_' + s.id).setScale(0.5);
-            const name = this.add.text(10, -8, s.name, { fontSize: '11px', fontWeight: 'bold', color: '#fff' }).setOrigin(0, 0.5);
-            const status = this.add.text(10, 8, '', { fontSize: '10px', fontWeight: 'bold', color: '#ffd700' }).setOrigin(0, 0.5);
+            const name = this.add.text(10, -8, s.name, { fontSize: '11px', fontWeight: 'bold', color: '#fff', fontFamily: 'Roboto, sans-serif' }).setOrigin(0, 0.5);
+            const status = this.add.text(10, 8, '', { fontSize: '10px', fontWeight: 'bold', color: '#ffd700', fontFamily: 'Roboto, sans-serif' }).setOrigin(0, 0.5);
 
             cont.add([box, icon, name, status]);
             cont.setSize(w, h);
@@ -257,7 +260,7 @@ class MenuScene extends Phaser.Scene {
         pBg.fillRoundedRect(-btnW/2, -btnH/2, btnW, btnH, 8);
         pBg.lineStyle(2, 0xb9f6ca, 1);
         pBg.strokeRoundedRect(-btnW/2, -btnH/2, btnW, btnH, 8);
-        const pTxt = this.add.text(0, 0, 'ИГРАТЬ', { fontSize: '18px', fontWeight: '900', color: '#fff' }).setOrigin(0.5);
+        const pTxt = this.add.text(0, 0, 'ИГРАТЬ', { fontSize: '18px', fontWeight: '900', color: '#fff', fontFamily: 'Roboto, sans-serif' }).setOrigin(0.5);
 
         playBtn.add([pBg, pTxt]);
         playBtn.setSize(btnW, btnH);
@@ -325,7 +328,8 @@ class RoleRevealScene extends Phaser.Scene {
             fontWeight: '900',
             color: '#00e676',
             stroke: '#003300',
-            strokeThickness: 6
+            strokeThickness: 6,
+            fontFamily: 'Roboto, sans-serif'
         }).setOrigin(0.5);
 
         this.add.image(width / 2, height * 0.52, 'crew_' + GameData.selected).setScale(2.4);
@@ -335,7 +339,8 @@ class RoleRevealScene extends Phaser.Scene {
         const sub = this.add.text(width / 2, height * 0.82, `Zombies incoming! ${sec}s`, {
             fontSize: '16px',
             fontWeight: 'bold',
-            color: '#ffffff'
+            color: '#ffffff',
+            fontFamily: 'Roboto, sans-serif'
         }).setOrigin(0.5);
 
         sfx.alarm();
@@ -472,17 +477,17 @@ class GameScene extends Phaser.Scene {
         hpBg.fillStyle(0x000000, 0.8);
         hpBg.fillRoundedRect(16, 16, 200, 24, 6);
         this.hpFill = this.add.graphics();
-        this.hpTxt = this.add.text(116, 28, '100 / 100', { fontSize: '12px', fontWeight: 'bold', color: '#fff' }).setOrigin(0.5);
+        this.hpTxt = this.add.text(116, 28, '100 / 100', { fontSize: '12px', fontWeight: 'bold', color: '#fff', fontFamily: 'Roboto, sans-serif' }).setOrigin(0.5);
 
         const cBg = this.add.graphics();
         cBg.fillStyle(0x000000, 0.8);
         cBg.fillRoundedRect(16, 46, 120, 26, 6);
         this.add.image(32, 59, 'coin').setScale(0.75);
-        this.coinTxt = this.add.text(48, 59, '0', { fontSize: '15px', fontWeight: 'bold', color: '#ffd700' }).setOrigin(0, 0.5);
+        this.coinTxt = this.add.text(48, 59, '0', { fontSize: '15px', fontWeight: 'bold', color: '#ffd700', fontFamily: 'Roboto, sans-serif' }).setOrigin(0, 0.5);
 
-        this.waveTxt = this.add.text(width - 18, 20, 'ВОЛНА 1 / 8', { fontSize: '18px', fontWeight: '900', color: '#fff', stroke: '#000', strokeThickness: 4 }).setOrigin(1, 0);
+        this.waveTxt = this.add.text(width - 18, 20, 'ВОЛНА 1 / 8', { fontSize: '18px', fontWeight: '900', color: '#fff', stroke: '#000', strokeThickness: 4, fontFamily: 'Roboto, sans-serif' }).setOrigin(1, 0);
 
-        this.banner = this.add.text(width / 2, height * 0.22, '', { fontSize: '28px', fontWeight: '900', color: '#ffeb3b', stroke: '#000', strokeThickness: 6 }).setOrigin(0.5).setAlpha(0);
+        this.banner = this.add.text(width / 2, height * 0.22, '', { fontSize: '28px', fontWeight: '900', color: '#ffeb3b', stroke: '#000', strokeThickness: 6, fontFamily: 'Roboto, sans-serif' }).setOrigin(0.5).setAlpha(0);
 
         this.hud.add([hpBg, this.hpFill, this.hpTxt, cBg, this.coinTxt, this.waveTxt, this.banner]);
 
@@ -505,370 +510,4 @@ class GameScene extends Phaser.Scene {
         keys.forEach((k, i) => {
             const x = startX + i * (bw + 6);
             const cont = this.add.container(x, posY).setScrollFactor(0).setDepth(101);
-            const bg = this.add.graphics();
-            const title = this.add.text(0, -8, this.upgrades[k].name, { fontSize: '11px', fontWeight: 'bold', color: '#fff' }).setOrigin(0.5);
-            const cost = this.add.text(0, 9, '', { fontSize: '10px', fontWeight: 'bold', color: '#ffd700' }).setOrigin(0.5);
-
-            cont.add([bg, title, cost]);
-            cont.setSize(bw, bh);
-            cont.setInteractive({ useHandCursor: true });
-            cont.on('pointerdown', (p) => { p.event.stopPropagation(); this.buyUpg(k); });
-
-            this.upBtns[k] = { cont, bg, cost, bw, bh, baseColor: colors[i] };
-        });
-    }
-
-    buyUpg(k) {
-        const u = this.upgrades[k];
-        if (k === 'multi' && u.lvl >= 4) return;
-        if (this.stats.sessionCoins < u.cost) return;
-
-        this.stats.sessionCoins -= u.cost;
-        u.lvl += 1;
-
-        if (k === 'damage') { this.stats.damage += 12; u.cost = Math.round(u.cost * 1.4); }
-        else if (k === 'fire') { this.stats.fireRate = Math.max(120, Math.round(this.stats.fireRate * 0.82)); u.cost = Math.round(u.cost * 1.4); }
-        else if (k === 'multi') { this.stats.multi += 1; this.upgrades[k].name = `Пули x${this.stats.multi}`; this.upBtns[k].cont.getAt(1).setText(this.upgrades[k].name); u.cost = Math.round(u.cost * 2); }
-        else if (k === 'speed') { this.stats.speed += 25; u.cost = Math.round(u.cost * 1.4); }
-        else if (k === 'hp') { this.stats.maxHp += 30; this.stats.hp = Math.min(this.stats.maxHp, this.stats.hp + 40); u.cost = Math.round(u.cost * 1.4); }
-
-        sfx.up();
-        this.refreshHUD();
-    }
-
-    refreshHUD() {
-        const r = Phaser.Math.Clamp(this.stats.hp / this.stats.maxHp, 0, 1);
-        this.hpFill.clear();
-        this.hpFill.fillStyle(r > 0.35 ? 0x00e676 : 0xff1744, 1);
-        this.hpFill.fillRoundedRect(18, 18, 196 * r, 20, 5);
-        this.hpTxt.setText(`${Math.ceil(this.stats.hp)} / ${this.stats.maxHp}`);
-        this.coinTxt.setText(this.stats.sessionCoins.toString());
-        this.waveTxt.setText(`ВОЛНА ${this.wave} / ${this.maxWaves}`);
-
-        Object.keys(this.upBtns).forEach(k => {
-            const b = this.upBtns[k];
-            const u = this.upgrades[k];
-            const isMax = (k === 'multi' && u.lvl >= 4);
-            const afford = !isMax && this.stats.sessionCoins >= u.cost;
-
-            b.bg.clear();
-            b.bg.fillStyle(afford ? b.baseColor : 0x263238, afford ? 0.92 : 0.7);
-            b.bg.fillRoundedRect(-b.bw/2, -b.bh/2, b.bw, b.bh, 8);
-            b.bg.lineStyle(2, afford ? 0xffffff : 0x455a64, 0.8);
-            b.bg.strokeRoundedRect(-b.bw/2, -b.bh/2, b.bw, b.bh, 8);
-
-            if (isMax) b.cost.setText('МАКС').setColor('#00e5ff');
-            else b.cost.setText(`Ур.${u.lvl} (${u.cost}💰)`).setColor(afford ? '#ffd700' : '#78909c');
-        });
-    }
-
-    buildJoystick() {
-        const { height } = this.scale;
-        this.jx = 100; this.jy = height - 130; this.jr = 50;
-
-        this.ring = this.add.circle(this.jx, this.jy, this.jr, 0xffffff, 0.08).setStrokeStyle(2, 0x00e5ff, 0.3).setScrollFactor(0).setDepth(90);
-        this.knob = this.add.circle(this.jx, this.jy, 22, 0x00e5ff, 0.4).setScrollFactor(0).setDepth(91);
-
-        this.input.on('pointerdown', (p) => {
-            if (p.y > height - 70) return;
-            if (this.joyId === null) {
-                this.joyId = p.id;
-                this.jx = p.x; this.jy = p.y;
-                this.ring.setPosition(this.jx, this.jy);
-                this.knob.setPosition(this.jx, this.jy);
-            }
-        });
-        this.input.on('pointermove', (p) => {
-            if (p.id !== this.joyId) return;
-            const dx = p.x - this.jx, dy = p.y - this.jy;
-            const d = Math.hypot(dx, dy), clamp = Math.min(d, this.jr), ang = Math.atan2(dy, dx);
-            this.knob.setPosition(this.jx + Math.cos(ang) * clamp, this.jy + Math.sin(ang) * clamp);
-            this.joyVec.set(d > 6 ? Math.cos(ang) : 0, d > 6 ? Math.sin(ang) : 0);
-        });
-        const resetJoy = (p) => {
-            if (p.id !== this.joyId) return;
-            this.joyId = null;
-            this.joyVec.set(0, 0);
-            this.jx = 100; this.jy = this.scale.height - 130;
-            this.ring.setPosition(this.jx, this.jy);
-            this.knob.setPosition(this.jx, this.jy);
-        };
-        this.input.on('pointerup', resetJoy);
-        this.input.on('pointercancel', resetJoy);
-    }
-
-    startWave(w) {
-        this.wave = w;
-        this.refreshHUD();
-
-        if (w === this.maxWaves) {
-            this.showBanner('БОСС: АЛЬФА-МУТАНТ!');
-            this.spawnBoss();
-            this.toSpawn = 4;
-        } else {
-            this.showBanner(`ВОЛНА ЗОМБИ ${w}`);
-            this.toSpawn = 5 + w * 4;
-        }
-
-        this.spawner = this.time.addEvent({
-            delay: Math.max(380, 1000 - w * 70),
-            callback: () => {
-                if (this.toSpawn > 0 && !this.isOver) {
-                    this.spawnZ(w);
-                    this.toSpawn--;
-                }
-            },
-            loop: true
-        });
-    }
-
-    showBanner(msg) {
-        this.banner.setText(msg).setAlpha(1).setScale(0.8);
-        this.tweens.add({
-            targets: this.banner, scale: 1.05, duration: 250, yoyo: true,
-            onComplete: () => {
-                this.tweens.add({ targets: this.banner, alpha: 0, delay: 1000, duration: 350 });
-            }
-        });
-    }
-
-    randEdge() {
-        const s = Phaser.Math.Between(0, 3);
-        const p = 60;
-        if (s === 0) return { x: Phaser.Math.Between(p, this.mapW - p), y: p };
-        if (s === 1) return { x: Phaser.Math.Between(p, this.mapW - p), y: this.mapH - p };
-        if (s === 2) return { x: p, y: Phaser.Math.Between(p, this.mapH - p) };
-        return { x: this.mapW - p, y: Phaser.Math.Between(p, this.mapH - p) };
-    }
-
-    spawnZ(w) {
-        const pos = this.randEdge();
-        let hp = 35 + w * 14, spd = 120 + w * 4, dmg = 10 + w * 2, reward = 5;
-        const r = Math.random();
-        if (w >= 3 && r < 0.35) { hp = Math.round(hp*0.7); spd = Math.round(spd*1.4); reward += 2; }
-
-        const z = this.enemies.create(pos.x, pos.y, 'zombie');
-        z.setCollideWorldBounds(true);
-        z.hp = hp; z.speed = spd; z.damage = dmg; z.reward = reward; z.isBoss = false;
-        this.alive++;
-    }
-
-    spawnBoss() {
-        const pos = this.randEdge();
-        const b = this.enemies.create(pos.x, pos.y, 'boss');
-        b.setCollideWorldBounds(true);
-        b.setCircle(50, 10, 10);
-        b.hp = 2200; b.maxHp = 2200; b.speed = 110; b.damage = 25; b.reward = 120; b.isBoss = true;
-        this.boss = b;
-        this.alive++;
-
-        this.bossTimer = this.time.addEvent({
-            delay: 2200,
-            callback: () => {
-                if (!this.boss || !this.boss.active || this.isOver) return;
-                for (let i = 0; i < 10; i++) {
-                    const a = (Math.PI * 2 / 10) * i;
-                    const s = this.bossShots.create(this.boss.x, this.boss.y, 'b_bullet');
-                    if (s) {
-                        s.setVelocity(Math.cos(a) * 240, Math.sin(a) * 240);
-                        this.time.delayedCall(3000, () => { if (s.active) s.destroy(); });
-                    }
-                }
-            },
-            loop: true
-        });
-    }
-
-    autoShoot(time) {
-        let target = null, minDist = 500;
-        this.enemies.getChildren().forEach(e => {
-            if (!e.active) return;
-            const d = Phaser.Math.Distance.Between(this.player.x, this.player.y, e.x, e.y);
-            if (d < minDist) { minDist = d; target = e; }
-        });
-
-        if (target) {
-            const angle = Phaser.Math.Angle.Between(this.player.x, this.player.y, target.x, target.y);
-            this.gun.setRotation(angle);
-            this.gun.setFlipY(Math.abs(angle) > Math.PI / 2);
-            this.player.setFlipX(Math.abs(angle) > Math.PI / 2);
-
-            if (time - this.lastFired >= this.stats.fireRate) {
-                this.lastFired = time;
-                const count = this.stats.multi;
-                const spread = 0.12;
-
-                for (let i = 0; i < count; i++) {
-                    const a = angle + (i - (count - 1) / 2) * spread;
-                    const b = this.bullets.create(this.gun.x, this.gun.y, 'bullet');
-                    if (b) {
-                        b.setVelocity(Math.cos(a) * 650, Math.sin(a) * 650);
-                        this.time.delayedCall(1000, () => { if (b.active) b.destroy(); });
-                    }
-                }
-                sfx.shoot();
-            }
-        }
-    }
-
-    onBulletHit(b, e) {
-        if (!b.active || !e.active) return;
-        b.destroy();
-        e.hp -= this.stats.damage;
-        sfx.hit();
-
-        e.setTintFill(0xffffff);
-        this.time.delayedCall(50, () => { if (e.active) e.clearTint(); });
-
-        if (e.hp <= 0) {
-            const coin = this.items.create(e.x, e.y, 'coin');
-            coin.kind = 'coin'; coin.val = e.reward;
-
-            if (!e.isBoss && Math.random() < 0.1) {
-                const med = this.items.create(e.x + 15, e.y, 'medkit');
-                med.kind = 'med';
-            }
-
-            const wasBoss = e.isBoss;
-            e.destroy();
-            this.alive--;
-
-            if (wasBoss) {
-                this.boss = null;
-                if (this.bossTimer) this.bossTimer.remove();
-            }
-
-            if (this.toSpawn <= 0 && this.alive <= 0 && !this.isOver) {
-                if (this.spawner) this.spawner.remove();
-                if (this.wave >= this.maxWaves) {
-                    this.endGame(true);
-                } else {
-                    this.showBanner('ОТСЕК ЗАЧИЩЕН!');
-                    this.time.delayedCall(2000, () => {
-                        if (!this.isOver) this.startWave(this.wave + 1);
-                    });
-                }
-            }
-        }
-    }
-
-    onPlayerHit(p, e) { this.hurtPlayer(e.damage); }
-    onBossShotHit(p, s) { s.destroy(); this.hurtPlayer(20); }
-
-    hurtPlayer(dmg) {
-        const now = this.time.now;
-        if (now - this.lastHurt < 500 || this.isOver) return;
-        this.lastHurt = now;
-
-        this.stats.hp = Math.max(0, this.stats.hp - dmg);
-        sfx.hurt();
-        this.cameras.main.shake(130, 0.01);
-        this.refreshHUD();
-
-        if (this.stats.hp <= 0) {
-            this.endGame(false);
-        }
-    }
-
-    onPickup(p, item) {
-        if (!item.active) return;
-        if (item.kind === 'coin') {
-            this.stats.sessionCoins += item.val;
-            sfx.coin();
-        } else if (item.kind === 'med') {
-            this.stats.hp = Math.min(this.stats.maxHp, this.stats.hp + 25);
-            sfx.up();
-        }
-        item.destroy();
-        this.refreshHUD();
-    }
-
-    endGame(victory) {
-        this.isOver = true;
-        this.player.setVelocity(0, 0);
-
-        GameData.coins += this.stats.sessionCoins;
-        GameData.save();
-
-        this.time.delayedCall(600, () => {
-            this.scene.start('EndScene', { victory, earned: this.stats.sessionCoins, total: GameData.coins });
-        });
-    }
-
-    update(time) {
-        if (this.isOver) return;
-
-        let vx = 0, vy = 0;
-        if (this.cursors.left.isDown || this.wasd.left.isDown) vx -= 1;
-        if (this.cursors.right.isDown || this.wasd.right.isDown) vx += 1;
-        if (this.cursors.up.isDown || this.wasd.up.isDown) vy -= 1;
-        if (this.cursors.down.isDown || this.wasd.down.isDown) vy += 1;
-
-        if (vx !== 0 || vy !== 0) {
-            const v = new Phaser.Math.Vector2(vx, vy).normalize();
-            this.player.setVelocity(v.x * this.stats.speed, v.y * this.stats.speed);
-        } else if (this.joyVec.length() > 0) {
-            this.player.setVelocity(this.joyVec.x * this.stats.speed, this.joyVec.y * this.stats.speed);
-        } else {
-            this.player.setVelocity(0, 0);
-        }
-
-        this.gun.setPosition(this.player.x, this.player.y + 4);
-
-        this.enemies.getChildren().forEach(e => {
-            if (e.active) this.physics.moveToObject(e, this.player, e.speed);
-        });
-
-        this.autoShoot(time);
-    }
-}
-
-class EndScene extends Phaser.Scene {
-    constructor() { super('EndScene'); }
-    init(data) {
-        this.victory = data.victory;
-        this.earned = data.earned || 0;
-        this.total = data.total || 0;
-    }
-    create() {
-        const { width, height } = this.scale;
-        this.add.graphics().fillStyle(0x0b0e14, 1).fillRect(0, 0, width, height);
-
-        this.add.text(width / 2, height * 0.25, this.victory ? 'ПОБЕДА!' : 'ПОРАЖЕНИЕ', {
-            fontSize: '48px', fontWeight: '900', color: this.victory ? '#00e676' : '#ff1744', stroke: '#000', strokeThickness: 6
-        }).setOrigin(0.5);
-
-        this.add.text(width / 2, height * 0.42, `Собрано монет: +${this.earned} 💰 | Всего в банке: ${this.total} 💰`, {
-            fontSize: '17px', fontWeight: 'bold', color: '#ffd700'
-        }).setOrigin(0.5);
-
-        const btn = this.add.container(width / 2, height * 0.68);
-        const bg = this.add.graphics();
-        bg.fillStyle(0x1e88e5, 1);
-        bg.fillRoundedRect(-130, -30, 260, 60, 12);
-        const txt = this.add.text(0, 0, 'В МЕНЮ', { fontSize: '20px', fontWeight: 'bold', color: '#fff' }).setOrigin(0.5);
-
-        btn.add([bg, txt]);
-        btn.setSize(260, 60);
-        btn.setInteractive({ useHandCursor: true });
-        btn.on('pointerdown', () => this.scene.start('MenuScene'));
-    }
-}
-
-const config = {
-    type: Phaser.AUTO,
-    scale: {
-        mode: Phaser.Scale.RESIZE,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-        width: window.innerWidth,
-        height: window.innerHeight
-    },
-    backgroundColor: '#0b0e14',
-    physics: { default: 'arcade', arcade: { gravity: { y: 0 }, debug: false } },
-    scene: [BootScene, MenuScene, RoleRevealScene, GameScene, EndScene]
-};
-
-new Phaser.Game(config);
-</script>
-</body>
-</html>
+            const b
